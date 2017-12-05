@@ -22,11 +22,7 @@ shinyUI(fluidPage(
                    "Number of bins:",
                    min = 1,
                    max = 50,
-                   value = 30), 
-       dateInput('date',
-                  label = 'Date input: yyyy-mm-dd',
-                  value = Sys.Date()
-         )
+                   value = 30)
     ),
     
     # Show a plot of the generated distribution
