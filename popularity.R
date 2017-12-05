@@ -36,14 +36,11 @@ popularity.server <- function(input, output){
     list.start <- list.selected[, 'oldest_published_date']
     list.end <- list.selected[, 'newest_published_date']
     
-    # Get each week or month between them
     if(list.names.results[, 'updated'] == "WEEKLY") {
       list.dates <- seq(as.Date(input$list.dates.range[1]), as.Date(input$list.dates.range[2]), by = "week")
     } else if(list.names.results[, 'updated' == "MONTHLY"]) {
       list.dates <- seq(as.Date(input$list.dates.range[1]), as.Date(input$list.dates.range[2]), by = "month")
     }
-    
-    # Pass that into overview
     
     UserCombinedInfo <- function(time.period) {
       
@@ -104,7 +101,6 @@ popularity.ui <- fluidPage(
                             choices = list("Rank" = "Rank", "Weeks on List" = "Week")),
                 htmlOutput('selectUI'),
                 htmlOutput('dateUI')
-                # !!! Caution might need to use a updateDateRangeInput function
               ),
               mainPanel(
                 plotlyOutput('popularity')
