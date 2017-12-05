@@ -13,7 +13,7 @@ library(shiny)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("Best-selling Authors"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -22,7 +22,11 @@ shinyUI(fluidPage(
                    "Number of bins:",
                    min = 1,
                    max = 50,
-                   value = 30)
+                   value = 30), 
+       dateInput('date',
+                  label = 'Date input: yyyy-mm-dd',
+                  value = Sys.Date()
+         )
     ),
     
     # Show a plot of the generated distribution
