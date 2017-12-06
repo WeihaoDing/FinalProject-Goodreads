@@ -36,7 +36,10 @@ UserCombinedInfo <- function(startdate,enddate) {
     }
 #Combined every date's info into one data frame.  
   combined.df.all <-lapply(time.period,OneDateInfo)
-  combined.df.all <-as.data.frame(do.call(rbind,combined.df.all)) %>% filter(weeks_on_list!=0)
+  combined.df.all <-as.data.frame(do.call(rbind,combined.df.all)) %>% 
+# Requesting price of each book will take a LONG time. Normally there will be 210 rows in the origin data frame #(42lists*5). I filter the data frame so that only the books whose weeks_on_list are over than 10 will show up in the new data frame. Therefore we are requesting the price information from the new data frame. 
+    filter(weeks_on_list!=0) %>% 
+    filter(weeks_on_list > 10)
   
   combined.df <-unique(combined.df.all) %>% 
     select(title, weeks_on_list, buy_links,publisher) 
@@ -90,7 +93,7 @@ UserCombinedInfo <- function(startdate,enddate) {
     exponentformat = "E"
   )
   yiranpriceplot <- plot_ly(
-    combined.df, x = ~price, y = ~weeks_on_list,type="scatter",marker=list(opacity =0.5,color= "#43C6DB"),
+    combined.df, x = ~price, y = ~weeks_on_list,type="scatter",mode = 'markers',marker=list(opacity =0.5,color= "#43C6DB"),
     text = ~paste(paste("Book Title:", title), 
                   paste("Publisher:", publisher),
                   paste("Popularity:",weeks_on_list),
@@ -101,31 +104,6 @@ UserCombinedInfo <- function(startdate,enddate) {
   }
 
 
-
-  
-#UI  #Delect after combined with other team members 
-source("price copy.R")
-shinyUI(fluidPage(
-  titlePanel("Yiran's Price Chart"),
-  sidebarLayout(
-    sidebarPanel(
-      dateRangeInput("dates", label = "Date range", start = "2008-06-02",end=Sys.Date())
-    ),
-    mainPanel(
-      plotlyOutput("yiranPlot")
-    )
-  )
-))
-
-#Server
-source("price copy.R")
-# Define server logic required to draw a histogram
-shinyServer(function(input, output) {
-  output$yiranPlot <-renderPlotly({
-    UserCombinedInfo(input$dates[1],input$dates[2])
-  })
-  
-})
 
 
   

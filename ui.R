@@ -1,33 +1,53 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
+source("price.R")
 
-library(shiny)
+my.ui <-navbarPage("NYT Books!",
+                   
+                   
+           tabPanel("Yiran",
+                    titlePanel("Price and Popularity Scatter Plot"),
+                    sidebarLayout(
+                      sidebarPanel(
+                        dateRangeInput("dates",
+                                       label = h3("Date range"),
+                                       start="2008-06-02",
+                                       end=(Sys.Date()-77)),
+                        hr(),
+                        fluidRow(column(4, verbatimTextOutput("value")))
+                      ),
+                      mainPanel(
+                        plotlyOutput("yiranPlot")
+                      )
+                    )
+           ),
+           
+           
+           tabPanel("Kim",
+                    titlePanel("Author and Populatiry Bar Plot"),
+                    sidebarLayout(
+                      sidebarPanel(   "say hello"
+                        
+                      ),
+                      mainPanel(    "say hello"
+                        
+                        
+                      )
+                    )
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    )
+           
+           
+           
+           
+           
+)
 
-# Define UI for application that draws a histogram
-shinyUI(fluidPage(
-  
-  # Application title
-  titlePanel("Best-selling Authors"),
-  
-  # Sidebar with a slider input for number of bins 
-  sidebarLayout(
-    sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 1,
-                   max = 50,
-                   value = 30)
-    ),
-    
-    # Show a plot of the generated distribution
-    mainPanel(
-       plotOutput("distPlot")
-    )
-  )
-))
+
+shinyUI(my.ui)
