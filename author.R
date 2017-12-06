@@ -14,8 +14,8 @@ retrieve.data <- function(date) {
   base.url <-"https://api.nytimes.com/svc/books/v3/lists/overview.json"
   query.params <-list("api-key" = key, "published_date" = date)
   response <- GET(base.url, query = query.params)
-  body <-content (response, "text")
-  results <-as.data.frame(fromJSON(body))
+  body <- content (response, "text")
+  results <- as.data.frame(fromJSON(body))
   return(results)
 }
 
