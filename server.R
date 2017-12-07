@@ -8,7 +8,7 @@ library(tidyr)
 source("author.R")
 source("publisher.R")
 source('price.R')
-source("review.R")
+source('review.R')
 source("api.key.R")
 
 list.names.url <- 'https://api.nytimes.com/svc/books/v3/lists/names.json'
@@ -17,13 +17,8 @@ list.names.response <- GET(list.names.url, query = list.names.query.params)
 list.names.body <- content(list.names.response, "text")
 list.names.results <- fromJSON(list.names.body)$results
 list.names.display <- list.names.results$display_name
-
 shinyServer(function(input, output) {
-  
-  output$yiranPlot <-renderPlotly({
-    UserCombinedInfo(input$dates[1],input$dates[2])
-  })
-  
+
   output$plot <- renderPlot({
     if (input$category == 'authors') {
       author.table <- author.data(input$date)
@@ -59,15 +54,6 @@ shinyServer(function(input, output) {
            col = "black")
     }
   })
-  output$negplot <- renderPlot({
-    reviewdata <- ReviewWords(input$isbn, input$title)
-    negative.cloud <- NegativeCloud(reviewdata)
-  })
-  
-  output$posplot <- renderPlot({
-    reviewdata <- ReviewWords(input$isbn, input$title)
-    positive.cloud <- PositiveCloud(reviewdata)
-  })
   
   output$selectUI <- renderUI({
     selectInput("list.select", label = h3("Select A Bestseller List"),
@@ -93,7 +79,7 @@ shinyServer(function(input, output) {
       
       one_date <- function(date){
         base.url <- 'https://api.nytimes.com/svc/books/v3/lists/overview.json'
-        query.params <-list("api-key"= key, "published_date"=date)
+        query.params <-list("api-key"= key, "published_date" = date)
         response <- GET(base.url, query = query.params)
         body <-content (response, "text")
         results <- as.data.frame(fromJSON(body)$results) %>% 
@@ -137,5 +123,19 @@ shinyServer(function(input, output) {
     
     return(p)
     
+  })
+  
+  output$negplot <- renderPlot({
+    reviewdata <- ReviewWords(input$isbn, input$title)
+    negative.cloud <- NegativeCloud(reviewdata)
+  })
+  
+  output$posplot <- renderPlot({
+    reviewdata <- ReviewWords(input$isbn, input$title)
+    positive.cloud <- PositiveCloud(reviewdata)
+  })
+  
+  output$yiranPlot <-renderPlotly({
+    UserCombinedInfo(input$dates[1],input$dates[2])
   })
 })

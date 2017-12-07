@@ -8,12 +8,11 @@ library("wordcloud")
 library("reshape2")
 
 source("./api.key.R")
-# test example: reviewdata <- ReviewWords("978-0375842207", "The Book Thief")
 
 # Get all words in the book review
 ReviewWords <- function(book.isbn, book.title) {
   base.url <- 'http://api.nytimes.com/svc/books/v3/reviews.json'
-  query.params <- list(isbn = book.isbn, title = book.title,  api_key = key)
+  query.params <- list(isbn = book.isbn, title = book.title,  api_key = kim.key)
   response <- GET(base.url, query = query.params)
   body <- content(response, "text")
   results <- fromJSON(body)
@@ -48,8 +47,6 @@ ReviewWords <- function(book.isbn, book.title) {
   return(content.count)
 }
 
-reviewdata <- ReviewWords(book.isbn, book.title)
-
 # Get wordcloud with negative words in review
 NegativeCloud <- function(reviewdata) {
   
@@ -67,8 +64,6 @@ NegativeCloud <- function(reviewdata) {
   return(ncloud)
 }
 
-negative.cloud <- NegativeCloud(reviewdata)
-
 # Get wordcloud with positive words in review
 PositiveCloud <- function(reviewdata) {
   
@@ -85,5 +80,3 @@ PositiveCloud <- function(reviewdata) {
                       random.order = TRUE, colors = "#00BFC4")
   return(pcloud)
 }
-
-positive.cloud <- PositiveCloud(reviewdata)
