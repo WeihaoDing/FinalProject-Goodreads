@@ -1,0 +1,13 @@
+name: FinalProject-Goodreads
+title: FinalProject-Goodreads
+username:
+account: kimberlycabamalan
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 245516
+bundleId: 1121914
+url: https://kimberlycabamalan.shinyapps.io/FinalProject-Goodreads/
+when: 1512681333.58642
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|api.key.R|README.md|Rplot.pdf
