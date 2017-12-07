@@ -45,5 +45,38 @@ shinyUI(fluidPage(
       plotOutput('plot')
     )
   )
-))
+),
+
+tabPanel("Reviews",
+         # Application title
+         titlePanel("Positive/Negative Words in Review"),
+         
+         # Sidebar with a slider input for number of bins 
+         sidebarLayout(
+           sidebarPanel(
+             textInput("title", label = h3("Title"), value = "The Book Thief"),
+             textInput("isbn", label = h3("ISBN"), value = "978-0375842207"),
+             hr(),
+             fluidRow(column(3, verbatimTextOutput("value")))
+           ),
+           
+           # Show a plot of the generated distribution
+           mainPanel(
+             fluidRow(
+               splitLayout(plotOutput("negplot"), plotOutput("posplot"))
+             )
+           )
+         )
+)
+
+
+
+
+
+
+
+
+
+
+)
 ))

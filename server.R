@@ -5,6 +5,7 @@ library(ggplot2)
 source("author.R")
 source("publisher.R")
 source('price.R')
+source("review.R")
 
 shinyServer(function(input, output) {
     output$yiranPlot <-renderPlotly({
@@ -45,5 +46,14 @@ shinyServer(function(input, output) {
              cex = 1.25, 
              col = "black")
       }
+    })
+    output$negplot <- renderPlot({
+      reviewdata <- ReviewWords(input$isbn, input$title)
+      negative.cloud <- NegativeCloud(reviewdata)
+    })
+    
+    output$posplot <- renderPlot({
+      reviewdata <- ReviewWords(input$isbn, input$title)
+      positive.cloud <- PositiveCloud(reviewdata)
     })
 })
