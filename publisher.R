@@ -1,12 +1,11 @@
 library(jsonlite)
 library(dplyr)
 library(httr)
-
-weihao.api.key = 'd5996a954fbf40e788bf0a3a16e5643c'
+source("api.key.R")
 
 getPublisherInfo <- function(date) {
   base.url <-"https://api.nytimes.com/svc/books/v3/lists/overview.json"
-  query.params <- list("api-key" = weihao.api.key, "published_date" = date)
+  query.params <- list("api-key" = key, "published_date" = date)
   response <- GET(base.url, query = query.params)
   body <-content (response, "text")
   results <-as.data.frame(fromJSON(body))

@@ -24,7 +24,7 @@ UserCombinedInfo <- function(startdate,enddate) {
   # create a data frame with the information NYT Book API "List/Overview" returns to me. 
   OneDateInfo <- function (date) {
     base.url <-"https://api.nytimes.com/svc/books/v3/lists/overview.json"
-    query.params <-list("api-key"=yiran.api.key, "published_date"=date)
+    query.params <-list("api-key"=key, "published_date"=date)
     response <- GET(base.url, query = query.params)
     body <-content (response, "text")
     results <-as.data.frame(fromJSON(body))

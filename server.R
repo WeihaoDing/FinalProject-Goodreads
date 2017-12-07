@@ -4,6 +4,7 @@ library(dplyr)
 library(ggplot2)
 source("author.R")
 source("publisher.R")
+source('price.R')
 
 shinyServer(function(input, output) {
     output$yiranPlot <-renderPlotly({
