@@ -5,8 +5,9 @@ library("dplyr")
 library("stringr")
 library("rvest")
 library("wordcloud")
+library("reshape2")
 
-source("./api-key.R")
+source("./api.key.R")
 # test example: reviewdata <- ReviewWords("978-0375842207", "The Book Thief")
 
 # Get all words in the book review
@@ -47,7 +48,7 @@ ReviewWords <- function(book.isbn, book.title) {
   return(content.count)
 }
 
-reviewdata <- ReviewWords <- function(book.isbn, book.title)
+reviewdata <- ReviewWords(book.isbn, book.title)
 
 # Get wordcloud with negative words in review
 NegativeCloud <- function(reviewdata) {
@@ -69,14 +70,14 @@ NegativeCloud <- function(reviewdata) {
 negative.cloud <- NegativeCloud(reviewdata)
 
 # Get wordcloud with positive words in review
-PositiveCloud <- function(content.count) {
+PositiveCloud <- function(reviewdata) {
   
   # Get positive words in "nrc" Lexicon
   nrc.pos <- get_sentiments("nrc") %>% 
     filter(sentiment == "positive")
   
   # Count the positive words in the review data
-  pos.words <- content.count %>%
+  pos.words <- reviewdata %>%
     inner_join(nrc.pos, by ="word") 
   
   # Create the positive word cloud
@@ -87,11 +88,17 @@ PositiveCloud <- function(content.count) {
 
 positive.cloud <- PositiveCloud(reviewdata)
 
+# content.sent <- bind_rows(pos.words, neg.words)
+# 
+# cloud <- content.sent %>% 
+#   count(word, sentiment, sort =TRUE) %>%
+#   acast(word ~ sentiment, value.var = "n", fill = 0) %>%
+#   comparison.cloud(scale = c(1.2,.5), random.order=TRUE, colors = c("#F8766D", "#00BFC4"),
+#                    title.size = 2, max.words = Inf)
 
 #this source: http://tidytextmining.com/tidytext.html 
 #provided helpful information for working with tidytext data and
 #for text mining in R
-
 
 
 
