@@ -11,6 +11,13 @@ source('price.R')
 source("review.R")
 source("api.key.R")
 
+list.names.url <- 'https://api.nytimes.com/svc/books/v3/lists/names.json'
+list.names.query.params <- list(api_key = key)
+list.names.response <- GET(list.names.url, query = list.names.query.params)
+list.names.body <- content(list.names.response, "text")
+list.names.results <- fromJSON(list.names.body)$results
+list.names.display <- list.names.results$display_name
+
 shinyServer(function(input, output) {
     
   output$yiranPlot <-renderPlotly({
@@ -86,7 +93,7 @@ shinyServer(function(input, output) {
         
         one_date <- function(date){
           base.url <- 'https://api.nytimes.com/svc/books/v3/lists/overview.json'
-          query.params <-list("api-key"= book.key, "published_date"=date)
+          query.params <-list("api-key"= key, "published_date"=date)
           response <- GET(base.url, query = query.params)
           body <-content (response, "text")
           results <- as.data.frame(fromJSON(body)$results) %>% 

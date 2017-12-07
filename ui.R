@@ -54,8 +54,8 @@ shinyUI(fluidPage(
              tabPanel("Reviews",
                       # Application title
                       titlePanel("Positive/Negative Words in Review"),
-                      
-                      # Sidebar with a slider input for number of bins 
+
+                      # Sidebar with a slider input for number of bins
                       sidebarLayout(
                         sidebarPanel(
                           textInput("title", label = h3("Title"), value = "The Book Thief"),
@@ -63,7 +63,7 @@ shinyUI(fluidPage(
                           hr(),
                           fluidRow(column(3, verbatimTextOutput("value")))
                         ),
-                        
+
                         # Show a plot of the generated distribution
                         mainPanel(
                           fluidRow(
