@@ -1,0 +1,12 @@
+name: book
+title: book
+username:
+account: ytma
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 245630
+bundleId: 1120578
+url: https://ytma.shinyapps.io/book/
+when: 1512637095.02062
+asMultiple: FALSE
+asStatic: FALSE
