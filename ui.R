@@ -1,14 +1,8 @@
 library(shiny)
 library(plotly)
 
-
-
-# Define UI for application that draws a histogram
 shinyUI(fluidPage(
   navbarPage("NYT Books!",
-             
-             
-             
              tabPanel("Price",
                       titlePanel("Price and Popularity Scatter Plot"),
                       sidebarLayout(
@@ -55,7 +49,7 @@ shinyUI(fluidPage(
                       # Application title
                       titlePanel("Positive/Negative Words in Review"),
                       
-                      # Sidebar with a slider input for number of bins 
+                      # Sidebar with a slider input for number of bins
                       sidebarLayout(
                         sidebarPanel(
                           textInput("title", label = h3("Title"), value = "The Book Thief"),
@@ -86,5 +80,5 @@ shinyUI(fluidPage(
                         )
                       )
              )
-)
+  )
 ))

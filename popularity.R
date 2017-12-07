@@ -1,4 +1,3 @@
-# Import essential libraries
 library(httr)
 library(jsonlite)
 library(dplyr)

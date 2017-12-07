@@ -30,13 +30,13 @@ ReviewWords <- function(book.isbn, book.title) {
   
   # Create tidytext structure of all words in review
   all.words <- dfcontent %>% unnest_tokens(word, review.content)
-
+  
   # Get all word counts
   word.count <- all.words %>% 
     group_by(word) %>% 
     summarize(count = n()) %>% 
     arrange(-count)
-
+  
   # Remove stop words
   content.words <- word.count %>% 
     anti_join(stop_words, by="word")
@@ -56,11 +56,11 @@ NegativeCloud <- function(reviewdata) {
   # Get negative words in "nrc" Lexicon
   nrc.neg <- get_sentiments("nrc") %>% 
     filter(sentiment == "negative")
-
+  
   # Count the negative words in the review data
   neg.words <- reviewdata %>%
     inner_join(nrc.neg, by ="word") 
-
+  
   # Create the negative word cloud
   ncloud <- wordcloud(neg.words$word, neg.words$count, scale = c(3,.5), min.freq = 1, max.words = Inf, random.order = TRUE, colors = "#C40500")
   
@@ -87,18 +87,3 @@ PositiveCloud <- function(reviewdata) {
 }
 
 positive.cloud <- PositiveCloud(reviewdata)
-
-# content.sent <- bind_rows(pos.words, neg.words)
-# 
-# cloud <- content.sent %>% 
-#   count(word, sentiment, sort =TRUE) %>%
-#   acast(word ~ sentiment, value.var = "n", fill = 0) %>%
-#   comparison.cloud(scale = c(1.2,.5), random.order=TRUE, colors = c("#F8766D", "#00BFC4"),
-#                    title.size = 2, max.words = Inf)
-
-#this source: http://tidytextmining.com/tidytext.html 
-#provided helpful information for working with tidytext data and
-#for text mining in R
-
-
-
