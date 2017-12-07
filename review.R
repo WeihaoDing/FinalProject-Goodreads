@@ -13,7 +13,7 @@ source("./api.key.R")
 # Get all words in the book review
 ReviewWords <- function(book.isbn, book.title) {
   base.url <- 'http://api.nytimes.com/svc/books/v3/reviews.json'
-  query.params <- list(isbn = book.isbn, title = book.title,  api_key = yogasaikey)
+  query.params <- list(isbn = book.isbn, title = book.title,  api_key = key)
   response <- GET(base.url, query = query.params)
   body <- content(response, "text")
   results <- fromJSON(body)
