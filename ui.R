@@ -18,30 +18,7 @@ my.ui <-navbarPage("NYT Books!",
                         plotlyOutput("yiranPlot")
                       )
                     )
-           ),
-           
-           
-           tabPanel("Kim",
-                    titlePanel("Author and Populatiry Bar Plot"),
-                    sidebarLayout(
-                      sidebarPanel(   "say hello"
-                        
-                      ),
-                      mainPanel(    "say hello"
-                        
-                        
-                      )
-                    )
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    )
+           )
            
            
            

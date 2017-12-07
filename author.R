@@ -12,7 +12,7 @@ author.data <- function(date){
 retrieve.data <- function(date) {
   key <- "2f6f47e7312b49239cd7617099bee3fe"
   base.url <-"https://api.nytimes.com/svc/books/v3/lists/overview.json"
-  query.params <-list("api-key" = key, "published_date" = date)
+  query.params <-list("api-key" = yiran.api.key, "published_date" = date)
   response <- GET(base.url, query = query.params)
   body <- content (response, "text")
   results <- as.data.frame(fromJSON(body))

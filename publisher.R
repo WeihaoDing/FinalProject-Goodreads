@@ -8,7 +8,7 @@ date <- '2015-01-26'
 
 getPublisherInfo <- function(date) {
   base.url <-"https://api.nytimes.com/svc/books/v3/lists/overview.json"
-  query.params <- list("api-key" = weihao.api.key, "published_date" = date)
+  query.params <- list("api-key" = yiran.api.key, "published_date" = date)
   response <- GET(base.url, query = query.params)
   body <-content (response, "text")
   results <-as.data.frame(fromJSON(body))
