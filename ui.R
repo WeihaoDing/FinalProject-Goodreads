@@ -6,10 +6,11 @@ library(plotly)
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
   navbarPage("NYT Books!",
-             tabPanel("Yiran",
+             tabPanel("Price",
                       titlePanel("Price and Popularity Scatter Plot"),
                       sidebarLayout(
                         sidebarPanel(
+                          helpText("While our optimal goal is returning a graph no matter how long the time period the user requests,I strongly suggest TA(s) input two same dates (like 2017-06-08 to 2017-06-08) when test. The loading time is approximately 10-15mins. Please wait for more time if the error premature appears. We appreciate your patient. "),
                           dateRangeInput("dates",
                                          label = h3("Date range"),
                                          start="2008-06-02",
@@ -24,7 +25,7 @@ shinyUI(fluidPage(
              ),
              
              
-             tabPanel("Kim",
+             tabPanel("Author and Publisher",
   # Application title
   titlePanel("Top 10 Bestsellers"),
   
